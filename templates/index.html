@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>视网膜血管分割演示系统</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif; 
+            background: linear-gradient(135deg, #1e3a5f 0%, #2e5984 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container { max-width: 1400px; margin: 0 auto; }
+        header { text-align: center; color: white; padding: 30px 0; }
+        h1 { font-size: 2.2em; margin-bottom: 10px; }
+        .upload-box { 
+            background: white; 
+            border-radius: 15px; 
+            padding: 40px; 
+            text-align: center; 
+            margin: 20px 0;
+            border: 3px dashed #4a90a4;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .upload-box:hover { border-color: #1e3a5f; transform: translateY(-2px); }
+        .results { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 20px; 
+            margin-top: 30px;
+        }
+        .card { 
+            background: white; 
+            border-radius: 10px; 
+            padding: 20px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .card h3 { 
+            color: #1e3a5f; 
+            margin-bottom: 15px; 
+            border-bottom: 2px solid #4a90a4;
+            padding-bottom: 10px;
+        }
+        .card img { 
+            width: 100%; 
+            border-radius: 8px; 
+            border: 1px solid #eee;
+        }
+        .metrics { 
+            background: white; 
+            border-radius: 15px; 
+            padding: 30px; 
+            margin-top: 30px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            text-align: center;
+        }
+        .metric-item { 
+            padding: 20px; 
+            background: #f5f7fa; 
+            border-radius: 10px;
+            border-left: 4px solid #4a90a4;
+        }
+        .metric-value { 
+            font-size: 2em; 
+            font-weight: bold; 
+            color: #1e3a5f; 
+        }
+        .metric-label { color: #666; margin-top: 5px; }
+        .loading { 
+            display: none; 
+            text-align: center; 
+            color: white; 
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+        .error-msg {
+            background: #ff6b6b;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            display: none;
+        }
+        input[type="file"] { display: none; }
+        .btn {
+            background: linear-gradient(135deg, #1e3a5f, #4a90a4);
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        .format-hint {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🩺 视网膜血管分割演示系统</h1>
+            <p>基于改进 U-Net（残差模块 + CBAM注意力 + 多尺度融合）</p>
+        </header>
+
+        <!-- 关键修改：accept属性移除对ppm的限制，改为*/* -->
+        <div class="upload-box" onclick="document.getElementById('file').click()">
+            <h2>📤 点击上传眼底图像（可多选多张）</h2>
+            <p style="color: #666; margin: 15px 0;">
+                支持 JPG、PNG、TIFF、PPM、PGM、PBM，一次最多 20 张<br>
+                <small>选择时可按住 Ctrl（或 Mac 上 Command）多选</small>
+            </p>
+            
+            <input type="file" id="file" name="files" multiple accept="image/*,.ppm,.pgm,.pbm,image/x-portable-bitmap,image/x-portable-greymap,image/x-portable-pixmap" onchange="handleUpload()" style="display: none;">
+            
+            <button class="btn" type="button">选择图像（可多选）</button>
+            
+            <div style="margin-top: 10px;">
+                <small style="color: #999;">若 PPM 无法选择，用下方按钮：</small><br>
+                <button class="btn" type="button" onclick="event.stopPropagation(); forceUpload();" style="background: #666; margin-top: 5px; padding: 8px 20px; font-size: 0.9em;">强制上传任意文件（可多选）</button>
+            </div>
+        </div>
+
+        <div class="error-msg" id="error-msg"></div>
+        <div class="loading" id="loading">⏳ 正在推理分割，请稍候...</div>
+
+        <div id="result-area" style="display: none;">
+            <div id="results-list"></div>
+        </div>
+    </div>
+
+    <script>
+        function forceUpload() {
+            var input = document.createElement('input');
+            input.type = 'file';
+            input.multiple = true;
+            input.onchange = function() {
+                var fileInput = document.getElementById('file');
+                fileInput.files = this.files;
+                handleUpload();
+            };
+            input.click();
+        }
+
+        async function handleUpload() {
+            var fileInput = document.getElementById('file');
+            var fileList = fileInput.files;
+            if (!fileList || fileList.length === 0) return;
+
+            var errorDiv = document.getElementById('error-msg');
+            errorDiv.style.display = 'none';
+
+            var formData = new FormData();
+            for (var i = 0; i < fileList.length; i++) {
+                formData.append('files', fileList[i]);
+            }
+
+            document.getElementById('loading').style.display = 'block';
+            document.getElementById('result-area').style.display = 'none';
+
+            try {
+                var res = await fetch('/predict', { method: 'POST', body: formData });
+                var data = await res.json();
+
+                if (data.success) {
+                    var list = document.getElementById('results-list');
+                    list.innerHTML = '';
+                    var results = data.results || [];
+                    if (results.length === 0 && data.original) {
+                        results = [{
+                            filename: '(单张)',
+                            original: data.original,
+                            mask: data.mask,
+                            overlay: data.overlay,
+                            metrics: data.metrics
+                        }];
+                    }
+                    for (var i = 0; i < results.length; i++) {
+                        var r = results[i];
+                        var wrap = document.createElement('div');
+                        wrap.style.marginTop = '30px';
+                        var title = document.createElement('div');
+                        title.style.color = 'white';
+                        title.style.marginBottom = '10px';
+                        title.style.fontWeight = '600';
+                        title.textContent = '第 ' + (i + 1) + ' 张：' + (r.filename || '(unknown)');
+                        wrap.appendChild(title);
+                        var row = document.createElement('div');
+                        row.className = 'results';
+                        row.innerHTML = '<div class="card"><h3>原始图像</h3><img src="data:image/png;base64,' + r.original + '"></div>' +
+                            '<div class="card"><h3>分割掩膜</h3><img src="data:image/png;base64,' + r.mask + '"></div>' +
+                            '<div class="card"><h3>叠加显示（红色标记血管）</h3><img src="data:image/png;base64,' + r.overlay + '"></div>';
+                        wrap.appendChild(row);
+                        var m = document.createElement('div');
+                        m.className = 'metrics';
+                        var metrics = r.metrics || {};
+                        m.innerHTML = '<div class="metric-item"><div class="metric-value">' + (metrics.dice != null ? metrics.dice : '--') + '%</div><div class="metric-label">Dice 系数</div></div>' +
+                            '<div class="metric-item"><div class="metric-value">' + (metrics.sensitivity != null ? metrics.sensitivity : '--') + '%</div><div class="metric-label">敏感度</div></div>' +
+                            '<div class="metric-item"><div class="metric-value">' + (metrics.specificity != null ? metrics.specificity : '--') + '%</div><div class="metric-label">特异性</div></div>';
+                        wrap.appendChild(m);
+                        list.appendChild(wrap);
+                    }
+                    if (data.errors && data.errors.length > 0) {
+                        errorDiv.textContent = '部分失败：' + data.errors.map(function(e) { return (e.filename || '') + ': ' + e.error; }).join('；');
+                        errorDiv.style.display = 'block';
+                    }
+                    document.getElementById('result-area').style.display = 'block';
+                } else {
+                    errorDiv.textContent = '错误：' + (data.error || '未知错误');
+                    errorDiv.style.display = 'block';
+                }
+            } catch (e) {
+                errorDiv.textContent = '上传错误：' + e;
+                errorDiv.style.display = 'block';
+            } finally {
+                document.getElementById('loading').style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
