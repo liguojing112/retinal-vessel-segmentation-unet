@@ -1,0 +1,29 @@
+# 数据集和上传文件（大文件/敏感数据）
+dataset/
+data/
+uploads/
+*.zip
+*.tar.gz
+*.rar
+
+# 模型权重（大文件）
+checkpoints/
+*.pth
+*.pt
+*.pkl
+*.h5
+*.onnx
+
+# Python
+__pycache__/
+*.py[cod]
+venv/
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc

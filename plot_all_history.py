@@ -87,7 +87,7 @@ plt.suptitle("Training History Comparison", fontsize=14, fontweight="bold")
 plt.tight_layout()
 
 out_path = BASE_DIR / "all_training_curves.png"
-plt.savefig(out_path, dpi=200, bbox_inches="tight")
+plt.savefig(out_path, dpi=300, bbox_inches="tight")
 print(f"已保存对比图: {out_path}")
 
 # 默认不弹窗，避免在 Windows / CI 环境卡住；如需弹窗，将 SHOW_PLOT=1

@@ -377,7 +377,8 @@ def train_model(root_dir, epochs=150, batch_size=4, lr=0.001, device='cpu', pati
         history['val_dice'].append(avg_val_dice)
         history['val_sens'].append(avg_val_sens)
         
-        current_lr = scheduler.step(epoch)
+        scheduler.step(epoch)
+        current_lr = optimizer.param_groups[0]['lr']
         
         print(f"[Epoch {epoch+1:3d}] Loss: {avg_train_loss:.4f} | "
               f"Dice: {avg_val_dice:.4f} | Sens: {avg_val_sens:.4f} | "
