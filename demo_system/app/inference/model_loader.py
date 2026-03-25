@@ -1,10 +1,15 @@
+import logging
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from typing import Any
 
 import torch
 
 from app.core.config import BASE_DIR, CHECKPOINT_CANDIDATES, DEFAULT_METRICS
+from app.core.errors import ModelError
 from app.inference.model_def import ImprovedUNet
+
+logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -12,6 +17,7 @@ class LoadedModel:
     model: ImprovedUNet
     checkpoint: str
     metrics: dict[str, float]
+    loaded_at: str
 
 
 class ModelLoader:
@@ -35,12 +41,19 @@ class ModelLoader:
                 metrics.update(self._extract_metrics(checkpoint))
                 model.load_state_dict(state_dict)
                 loaded_checkpoint = str(checkpoint_path.relative_to(BASE_DIR.parent))
+                logger.info("模型加载成功: %s", loaded_checkpoint)
                 break
-            except Exception as exc:
-                print(f"[警告] 加载失败 {checkpoint_path}: {exc}")
+            except Exception:
+                logger.exception("加载失败: %s", checkpoint_path)
 
         model.eval()
-        self._loaded_model = LoadedModel(model=model, checkpoint=loaded_checkpoint, metrics=metrics)
+        loaded_at = datetime.now(timezone.utc).isoformat()
+        self._loaded_model = LoadedModel(
+            model=model,
+            checkpoint=loaded_checkpoint,
+            metrics=metrics,
+            loaded_at=loaded_at,
+        )
         return self._loaded_model
 
     @staticmethod
@@ -49,7 +62,7 @@ class ModelLoader:
             return checkpoint["model_state_dict"]
         if isinstance(checkpoint, dict):
             return checkpoint
-        raise ValueError("checkpoint 格式不支持")
+        raise ModelError("checkpoint 格式不支持")
 
     @staticmethod
     def _extract_metrics(checkpoint: Any) -> dict[str, float]:

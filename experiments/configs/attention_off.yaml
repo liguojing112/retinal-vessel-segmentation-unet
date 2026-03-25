@@ -1,0 +1,5 @@
+name: ablation_attention_off
+model_checkpoint: checkpoints/best_model.pth
+input_size: [512, 512]
+threshold: 0.5
+notes: "ablation without channel attention"

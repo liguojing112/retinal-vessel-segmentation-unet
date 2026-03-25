@@ -1,16 +1,23 @@
 from pathlib import Path
 
-import cv2
 import numpy as np
 from PIL import Image
 
 from app.core.config import MODEL_INPUT_SIZE
+from app.core.errors import ProcessingError
+
+
+def _import_cv2():
+    import cv2
+
+    return cv2
 
 
 def robust_imread(filepath: str | Path) -> np.ndarray:
     path = str(filepath)
 
     try:
+        cv2 = _import_cv2()
         image = cv2.imread(path, cv2.IMREAD_UNCHANGED)
         if image is not None and image.size > 0:
             return image
@@ -24,16 +31,18 @@ def robust_imread(filepath: str | Path) -> np.ndarray:
             pil_img = pil_img.convert("RGB")
             image = np.array(pil_img)
         if len(image.shape) == 3 and image.shape[2] == 3:
+            cv2 = _import_cv2()
             image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
         return image
     except Exception as exc:
-        raise ValueError(f"无法读取图像: {filepath}") from exc
+        raise ProcessingError(f"无法读取图像: {filepath}") from exc
 
 
 def preprocess(filepath: str | Path) -> tuple[np.ndarray, np.ndarray]:
+    cv2 = _import_cv2()
     image = robust_imread(filepath)
     if image is None:
-        raise ValueError("图像为空")
+        raise ProcessingError("图像为空")
 
     if len(image.shape) == 2:
         image = cv2.cvtColor(image, cv2.COLOR_GRAY2BGR)

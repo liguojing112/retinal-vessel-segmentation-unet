@@ -1,0 +1,5 @@
+name: baseline_unet
+model_checkpoint: checkpoints/best_model_800.pth
+input_size: [512, 512]
+threshold: 0.5
+notes: "baseline for online demo"

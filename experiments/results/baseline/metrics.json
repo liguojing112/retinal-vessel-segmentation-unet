@@ -1,0 +1,6 @@
+{
+  "name": "baseline",
+  "dice": 0.865,
+  "sensitivity": 0.82,
+  "specificity": 0.975
+}
