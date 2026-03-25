@@ -17,6 +17,9 @@ checkpoints/
 # Python
 __pycache__/
 *.py[cod]
+*.pyo
+*.pyd
+.venv/
 venv/
 .env
 
@@ -24,6 +27,7 @@ venv/
 .vscode/
 .idea/
 
-# Python
-__pycache__/
-*.pyc
+# Logs / OS
+*.log
+.DS_Store
+Thumbs.db

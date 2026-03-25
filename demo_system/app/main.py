@@ -1,6 +1,8 @@
 import logging
+import os
 import time
 import uuid
+from collections import defaultdict
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
@@ -16,12 +18,35 @@ from app.core.logging import configure_logging, request_id_ctx
 configure_logging(LOG_LEVEL)
 logger = logging.getLogger(__name__)
 
+RATE_LIMIT_RPM = int(os.getenv("RATE_LIMIT_RPM", "60"))
+
 
 class UploadSizeLimitMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         content_length = request.headers.get("content-length")
         if content_length and int(content_length) > MAX_CONTENT_LENGTH:
             return JSONResponse(status_code=413, content={"error": "上传文件过大"})
+        return await call_next(request)
+
+
+class RateLimitMiddleware(BaseHTTPMiddleware):
+    """基于 IP 的简易内存限流（每分钟 N 次请求）。"""
+
+    def __init__(self, app, rpm: int = 60) -> None:
+        super().__init__(app)
+        self.rpm = rpm
+        self._hits: dict[str, list[float]] = defaultdict(list)
+
+    async def dispatch(self, request: Request, call_next):
+        if request.url.path in ("/health", "/docs", "/openapi.json"):
+            return await call_next(request)
+        client_ip = request.client.host if request.client else "unknown"
+        now = time.time()
+        window = [t for t in self._hits[client_ip] if now - t < 60]
+        window.append(now)
+        self._hits[client_ip] = window
+        if len(window) > self.rpm:
+            return JSONResponse(status_code=429, content={"error": "请求过于频繁，请稍后再试"})
         return await call_next(request)
 
 
@@ -42,8 +67,9 @@ class RequestContextMiddleware(BaseHTTPMiddleware):
         return response
 
 
-app = FastAPI(title="Retinal Vessel Segmentation Demo", version="1.1.0")
+app = FastAPI(title="Retinal Vessel Segmentation Demo", version="1.2.0")
 app.add_middleware(UploadSizeLimitMiddleware)
+app.add_middleware(RateLimitMiddleware, rpm=RATE_LIMIT_RPM)
 app.add_middleware(RequestContextMiddleware)
 app.add_middleware(
     CORSMiddleware,

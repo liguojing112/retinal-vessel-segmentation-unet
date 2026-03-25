@@ -1,0 +1,31 @@
+name: no_residual
+seed: 42
+dataset_dir: dataset
+
+model:
+  use_channel_attention: true
+  use_residual: false
+  use_multiscale: true
+
+training:
+  epochs: 150
+  batch_size: 4
+  lr: 0.001
+  weight_decay: 0.0001
+  patience: 40
+  accumulation_steps: 4
+  device: cpu
+  loss: combo
+  scheduler: cosine_warm
+
+preprocessing:
+  use_clahe: true
+  use_gamma: true
+  gamma: 1.2
+  clahe_clip: 2.0
+  input_size: 512
+
+evaluation:
+  threshold: 0.5
+
+notes: "Ablation: Residual connections removed (plain conv blocks)"

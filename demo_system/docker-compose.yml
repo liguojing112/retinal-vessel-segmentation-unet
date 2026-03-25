@@ -8,9 +8,32 @@ services:
       - .env
     volumes:
       - ./uploads:/app/uploads
+      - ../checkpoints:/app/../checkpoints:ro
     deploy:
       resources:
         limits:
           cpus: "2.0"
           memory: 4G
     restart: unless-stopped
+
+  demo-gpu:
+    build: .
+    ports:
+      - "5001:5000"
+    env_file:
+      - .env
+    volumes:
+      - ./uploads:/app/uploads
+      - ../checkpoints:/app/../checkpoints:ro
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
+        limits:
+          memory: 8G
+    restart: unless-stopped
+    profiles:
+      - gpu
