@@ -1,3 +1,18 @@
+"""项目名称：基于U-Net的视网膜血管图像分割
+
+作者信息：李国敬
+
+GitHub：liguojing112
+
+创建日期：2026/3/26
+
+许可证：MIT
+
+本地启动脚本。
+
+用于以 Uvicorn 启动 FastAPI 演示服务，默认监听 5000 端口。"""
+
+
 import uvicorn
 
 

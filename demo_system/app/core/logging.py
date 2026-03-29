@@ -1,3 +1,18 @@
+"""项目名称：基于U-Net的视网膜血管图像分割
+
+作者信息：李国敬
+
+GitHub：liguojing112
+
+创建日期：2026/3/26
+
+许可证：MIT
+
+日志工具模块。
+
+提供 request_id 上下文注入与统一日志格式配置能力。"""
+
+
 import logging
 import time
 from contextvars import ContextVar

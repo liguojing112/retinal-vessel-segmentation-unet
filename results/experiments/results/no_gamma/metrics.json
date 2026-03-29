@@ -1,0 +1,12 @@
+{
+  "name": "no_gamma",
+  "dice": 0.8903,
+  "iou": 0.8114,
+  "sensitivity": 0.8936,
+  "specificity": 0.9924,
+  "params": 2028929,
+  "avg_inference_ms": 559.26,
+  "seed": 42,
+  "threshold": 0.5,
+  "notes": "Ablation: Gamma correction removed"
+}

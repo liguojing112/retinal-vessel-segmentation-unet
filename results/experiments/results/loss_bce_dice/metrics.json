@@ -1,0 +1,1616 @@
+{
+  "name": "loss_bce_dice",
+  "dice": 0.8972,
+  "iou": 0.8235,
+  "sensitivity": 0.8814,
+  "specificity": 0.9948,
+  "params": 2028929,
+  "avg_inference_ms": 650.06,
+  "seed": 42,
+  "threshold": 0.5,
+  "notes": "Ablation: Loss changed to BCE+Dice (no pos_weight/fn_penalty vs Combo)",
+  "checkpoint": "C:\\Workspace\\retinal-vessel-segmentation-unet\\results\\experiments\\results\\loss_bce_dice\\best_model.pth",
+  "num_samples": 200,
+  "per_sample": [
+    {
+      "filename": "kaggle_001.png",
+      "dice": 0.9462,
+      "iou": 0.8978,
+      "sensitivity": 0.9495,
+      "specificity": 0.9955,
+      "inference_ms": 779.84
+    },
+    {
+      "filename": "kaggle_002.png",
+      "dice": 0.8472,
+      "iou": 0.7349,
+      "sensitivity": 0.8887,
+      "specificity": 0.9921,
+      "inference_ms": 649.55
+    },
+    {
+      "filename": "kaggle_003.png",
+      "dice": 0.8779,
+      "iou": 0.7824,
+      "sensitivity": 0.8944,
+      "specificity": 0.9923,
+      "inference_ms": 642.15
+    },
+    {
+      "filename": "kaggle_004.png",
+      "dice": 0.8787,
+      "iou": 0.7837,
+      "sensitivity": 0.8184,
+      "specificity": 0.996,
+      "inference_ms": 614.76
+    },
+    {
+      "filename": "kaggle_005.png",
+      "dice": 0.9266,
+      "iou": 0.8632,
+      "sensitivity": 0.9159,
+      "specificity": 0.9955,
+      "inference_ms": 636.44
+    },
+    {
+      "filename": "kaggle_006.png",
+      "dice": 0.9519,
+      "iou": 0.9082,
+      "sensitivity": 0.9549,
+      "specificity": 0.9952,
+      "inference_ms": 580.82
+    },
+    {
+      "filename": "kaggle_007.png",
+      "dice": 0.9669,
+      "iou": 0.9359,
+      "sensitivity": 0.9591,
+      "specificity": 0.9976,
+      "inference_ms": 586.75
+    },
+    {
+      "filename": "kaggle_008.png",
+      "dice": 0.9552,
+      "iou": 0.9143,
+      "sensitivity": 0.944,
+      "specificity": 0.9965,
+      "inference_ms": 590.24
+    },
+    {
+      "filename": "kaggle_009.png",
+      "dice": 0.8333,
+      "iou": 0.7143,
+      "sensitivity": 0.8545,
+      "specificity": 0.9945,
+      "inference_ms": 560.66
+    },
+    {
+      "filename": "kaggle_010.png",
+      "dice": 0.9513,
+      "iou": 0.9072,
+      "sensitivity": 0.9514,
+      "specificity": 0.9954,
+      "inference_ms": 555.27
+    },
+    {
+      "filename": "kaggle_011.png",
+      "dice": 0.8993,
+      "iou": 0.8171,
+      "sensitivity": 0.8933,
+      "specificity": 0.9928,
+      "inference_ms": 601.21
+    },
+    {
+      "filename": "kaggle_012.png",
+      "dice": 0.9457,
+      "iou": 0.8971,
+      "sensitivity": 0.9531,
+      "specificity": 0.9947,
+      "inference_ms": 572.49
+    },
+    {
+      "filename": "kaggle_013.png",
+      "dice": 0.8671,
+      "iou": 0.7654,
+      "sensitivity": 0.845,
+      "specificity": 0.9926,
+      "inference_ms": 574.7
+    },
+    {
+      "filename": "kaggle_014.png",
+      "dice": 0.941,
+      "iou": 0.8886,
+      "sensitivity": 0.9406,
+      "specificity": 0.9952,
+      "inference_ms": 593.2
+    },
+    {
+      "filename": "kaggle_015.png",
+      "dice": 0.6893,
+      "iou": 0.5259,
+      "sensitivity": 0.5516,
+      "specificity": 0.9989,
+      "inference_ms": 563.34
+    },
+    {
+      "filename": "kaggle_016.png",
+      "dice": 0.7333,
+      "iou": 0.579,
+      "sensitivity": 0.6244,
+      "specificity": 0.9981,
+      "inference_ms": 625.3
+    },
+    {
+      "filename": "kaggle_017.png",
+      "dice": 0.927,
+      "iou": 0.8639,
+      "sensitivity": 0.9073,
+      "specificity": 0.9957,
+      "inference_ms": 557.1
+    },
+    {
+      "filename": "kaggle_018.png",
+      "dice": 0.8844,
+      "iou": 0.7928,
+      "sensitivity": 0.8559,
+      "specificity": 0.9948,
+      "inference_ms": 594.1
+    },
+    {
+      "filename": "kaggle_019.png",
+      "dice": 0.9434,
+      "iou": 0.8929,
+      "sensitivity": 0.9523,
+      "specificity": 0.9949,
+      "inference_ms": 615.07
+    },
+    {
+      "filename": "kaggle_020.png",
+      "dice": 0.9544,
+      "iou": 0.9129,
+      "sensitivity": 0.9416,
+      "specificity": 0.9967,
+      "inference_ms": 596.77
+    },
+    {
+      "filename": "kaggle_021.png",
+      "dice": 0.6614,
+      "iou": 0.4941,
+      "sensitivity": 0.6019,
+      "specificity": 0.9952,
+      "inference_ms": 576.6
+    },
+    {
+      "filename": "kaggle_022.png",
+      "dice": 0.9203,
+      "iou": 0.8523,
+      "sensitivity": 0.9122,
+      "specificity": 0.9937,
+      "inference_ms": 581.23
+    },
+    {
+      "filename": "kaggle_023.png",
+      "dice": 0.9513,
+      "iou": 0.907,
+      "sensitivity": 0.942,
+      "specificity": 0.9966,
+      "inference_ms": 598.17
+    },
+    {
+      "filename": "kaggle_024.png",
+      "dice": 0.8372,
+      "iou": 0.7199,
+      "sensitivity": 0.8053,
+      "specificity": 0.996,
+      "inference_ms": 559.18
+    },
+    {
+      "filename": "kaggle_025.png",
+      "dice": 0.2183,
+      "iou": 0.1225,
+      "sensitivity": 0.1327,
+      "specificity": 0.9993,
+      "inference_ms": 612.01
+    },
+    {
+      "filename": "kaggle_026.png",
+      "dice": 0.1356,
+      "iou": 0.0727,
+      "sensitivity": 0.0755,
+      "specificity": 0.9993,
+      "inference_ms": 621.83
+    },
+    {
+      "filename": "kaggle_027.png",
+      "dice": 0.9287,
+      "iou": 0.8669,
+      "sensitivity": 0.911,
+      "specificity": 0.9966,
+      "inference_ms": 605.11
+    },
+    {
+      "filename": "kaggle_028.png",
+      "dice": 0.9477,
+      "iou": 0.9006,
+      "sensitivity": 0.9346,
+      "specificity": 0.9965,
+      "inference_ms": 568.54
+    },
+    {
+      "filename": "kaggle_029.png",
+      "dice": 0.9165,
+      "iou": 0.8459,
+      "sensitivity": 0.8895,
+      "specificity": 0.9967,
+      "inference_ms": 575.02
+    },
+    {
+      "filename": "kaggle_030.png",
+      "dice": 0.8804,
+      "iou": 0.7864,
+      "sensitivity": 0.8582,
+      "specificity": 0.9948,
+      "inference_ms": 631.4
+    },
+    {
+      "filename": "kaggle_031.png",
+      "dice": 0.9246,
+      "iou": 0.8598,
+      "sensitivity": 0.9102,
+      "specificity": 0.9954,
+      "inference_ms": 605.73
+    },
+    {
+      "filename": "kaggle_032.png",
+      "dice": 0.8787,
+      "iou": 0.7837,
+      "sensitivity": 0.8366,
+      "specificity": 0.9961,
+      "inference_ms": 614.81
+    },
+    {
+      "filename": "kaggle_033.png",
+      "dice": 0.9465,
+      "iou": 0.8984,
+      "sensitivity": 0.9452,
+      "specificity": 0.9952,
+      "inference_ms": 603.97
+    },
+    {
+      "filename": "kaggle_034.png",
+      "dice": 0.9335,
+      "iou": 0.8754,
+      "sensitivity": 0.9334,
+      "specificity": 0.994,
+      "inference_ms": 583.43
+    },
+    {
+      "filename": "kaggle_035.png",
+      "dice": 0.9607,
+      "iou": 0.9243,
+      "sensitivity": 0.9588,
+      "specificity": 0.9965,
+      "inference_ms": 601.58
+    },
+    {
+      "filename": "kaggle_036.png",
+      "dice": 0.9148,
+      "iou": 0.843,
+      "sensitivity": 0.9225,
+      "specificity": 0.9935,
+      "inference_ms": 601.19
+    },
+    {
+      "filename": "kaggle_037.png",
+      "dice": 0.7833,
+      "iou": 0.6438,
+      "sensitivity": 0.716,
+      "specificity": 0.9968,
+      "inference_ms": 619.71
+    },
+    {
+      "filename": "kaggle_038.png",
+      "dice": 0.9323,
+      "iou": 0.8732,
+      "sensitivity": 0.9044,
+      "specificity": 0.9967,
+      "inference_ms": 608.91
+    },
+    {
+      "filename": "kaggle_039.png",
+      "dice": 0.8439,
+      "iou": 0.7299,
+      "sensitivity": 0.8285,
+      "specificity": 0.9934,
+      "inference_ms": 597.73
+    },
+    {
+      "filename": "kaggle_040.png",
+      "dice": 0.6209,
+      "iou": 0.4502,
+      "sensitivity": 0.5075,
+      "specificity": 0.9969,
+      "inference_ms": 595.02
+    },
+    {
+      "filename": "kaggle_041.png",
+      "dice": 0.7558,
+      "iou": 0.6074,
+      "sensitivity": 0.6997,
+      "specificity": 0.996,
+      "inference_ms": 653.96
+    },
+    {
+      "filename": "kaggle_042.png",
+      "dice": 0.7875,
+      "iou": 0.6496,
+      "sensitivity": 0.6943,
+      "specificity": 0.9985,
+      "inference_ms": 606.18
+    },
+    {
+      "filename": "kaggle_043.png",
+      "dice": 0.9604,
+      "iou": 0.9238,
+      "sensitivity": 0.9521,
+      "specificity": 0.9967,
+      "inference_ms": 605.27
+    },
+    {
+      "filename": "kaggle_044.png",
+      "dice": 0.9622,
+      "iou": 0.9272,
+      "sensitivity": 0.9638,
+      "specificity": 0.9962,
+      "inference_ms": 652.65
+    },
+    {
+      "filename": "kaggle_045.png",
+      "dice": 0.9055,
+      "iou": 0.8273,
+      "sensitivity": 0.9194,
+      "specificity": 0.9941,
+      "inference_ms": 678.22
+    },
+    {
+      "filename": "kaggle_046.png",
+      "dice": 0.943,
+      "iou": 0.8922,
+      "sensitivity": 0.9451,
+      "specificity": 0.9949,
+      "inference_ms": 686.59
+    },
+    {
+      "filename": "kaggle_047.png",
+      "dice": 0.9579,
+      "iou": 0.9193,
+      "sensitivity": 0.9447,
+      "specificity": 0.997,
+      "inference_ms": 657.16
+    },
+    {
+      "filename": "kaggle_048.png",
+      "dice": 0.9257,
+      "iou": 0.8617,
+      "sensitivity": 0.9085,
+      "specificity": 0.9941,
+      "inference_ms": 642.05
+    },
+    {
+      "filename": "kaggle_049.png",
+      "dice": 0.8364,
+      "iou": 0.7188,
+      "sensitivity": 0.8204,
+      "specificity": 0.9944,
+      "inference_ms": 662.93
+    },
+    {
+      "filename": "kaggle_050.png",
+      "dice": 0.7517,
+      "iou": 0.6022,
+      "sensitivity": 0.7437,
+      "specificity": 0.9922,
+      "inference_ms": 624.36
+    },
+    {
+      "filename": "kaggle_051.png",
+      "dice": 0.9197,
+      "iou": 0.8513,
+      "sensitivity": 0.9082,
+      "specificity": 0.993,
+      "inference_ms": 689.55
+    },
+    {
+      "filename": "kaggle_052.png",
+      "dice": 0.9365,
+      "iou": 0.8806,
+      "sensitivity": 0.9173,
+      "specificity": 0.9967,
+      "inference_ms": 701.75
+    },
+    {
+      "filename": "kaggle_053.png",
+      "dice": 0.8913,
+      "iou": 0.8039,
+      "sensitivity": 0.9205,
+      "specificity": 0.9949,
+      "inference_ms": 668.64
+    },
+    {
+      "filename": "kaggle_054.png",
+      "dice": 0.8603,
+      "iou": 0.7549,
+      "sensitivity": 0.8355,
+      "specificity": 0.9964,
+      "inference_ms": 646.8
+    },
+    {
+      "filename": "kaggle_055.png",
+      "dice": 0.9623,
+      "iou": 0.9273,
+      "sensitivity": 0.9532,
+      "specificity": 0.9974,
+      "inference_ms": 649.71
+    },
+    {
+      "filename": "kaggle_056.png",
+      "dice": 0.9561,
+      "iou": 0.9158,
+      "sensitivity": 0.9463,
+      "specificity": 0.9971,
+      "inference_ms": 656.08
+    },
+    {
+      "filename": "kaggle_057.png",
+      "dice": 0.9132,
+      "iou": 0.8403,
+      "sensitivity": 0.8995,
+      "specificity": 0.9927,
+      "inference_ms": 624.65
+    },
+    {
+      "filename": "kaggle_058.png",
+      "dice": 0.8917,
+      "iou": 0.8045,
+      "sensitivity": 0.9236,
+      "specificity": 0.9866,
+      "inference_ms": 649.68
+    },
+    {
+      "filename": "kaggle_059.png",
+      "dice": 0.6774,
+      "iou": 0.5122,
+      "sensitivity": 0.5417,
+      "specificity": 0.9956,
+      "inference_ms": 676.44
+    },
+    {
+      "filename": "kaggle_060.png",
+      "dice": 0.7188,
+      "iou": 0.561,
+      "sensitivity": 0.6151,
+      "specificity": 0.9937,
+      "inference_ms": 682.04
+    },
+    {
+      "filename": "kaggle_061.png",
+      "dice": 0.8813,
+      "iou": 0.7878,
+      "sensitivity": 0.8713,
+      "specificity": 0.9936,
+      "inference_ms": 665.05
+    },
+    {
+      "filename": "kaggle_062.png",
+      "dice": 0.9074,
+      "iou": 0.8305,
+      "sensitivity": 0.9113,
+      "specificity": 0.9937,
+      "inference_ms": 715.02
+    },
+    {
+      "filename": "kaggle_063.png",
+      "dice": 0.8996,
+      "iou": 0.8175,
+      "sensitivity": 0.9108,
+      "specificity": 0.9891,
+      "inference_ms": 668.41
+    },
+    {
+      "filename": "kaggle_064.png",
+      "dice": 0.9017,
+      "iou": 0.821,
+      "sensitivity": 0.899,
+      "specificity": 0.9915,
+      "inference_ms": 667.76
+    },
+    {
+      "filename": "kaggle_065.png",
+      "dice": 0.948,
+      "iou": 0.9012,
+      "sensitivity": 0.9439,
+      "specificity": 0.9954,
+      "inference_ms": 670.42
+    },
+    {
+      "filename": "kaggle_066.png",
+      "dice": 0.9524,
+      "iou": 0.9092,
+      "sensitivity": 0.9408,
+      "specificity": 0.997,
+      "inference_ms": 668.69
+    },
+    {
+      "filename": "kaggle_067.png",
+      "dice": 0.9525,
+      "iou": 0.9093,
+      "sensitivity": 0.9529,
+      "specificity": 0.9953,
+      "inference_ms": 665.78
+    },
+    {
+      "filename": "kaggle_068.png",
+      "dice": 0.9357,
+      "iou": 0.8792,
+      "sensitivity": 0.9179,
+      "specificity": 0.9959,
+      "inference_ms": 640.95
+    },
+    {
+      "filename": "kaggle_069.png",
+      "dice": 0.9268,
+      "iou": 0.8636,
+      "sensitivity": 0.9207,
+      "specificity": 0.9941,
+      "inference_ms": 659.03
+    },
+    {
+      "filename": "kaggle_070.png",
+      "dice": 0.9221,
+      "iou": 0.8554,
+      "sensitivity": 0.9119,
+      "specificity": 0.9947,
+      "inference_ms": 617.6
+    },
+    {
+      "filename": "kaggle_071.png",
+      "dice": 0.9062,
+      "iou": 0.8285,
+      "sensitivity": 0.8883,
+      "specificity": 0.9941,
+      "inference_ms": 690.14
+    },
+    {
+      "filename": "kaggle_072.png",
+      "dice": 0.8994,
+      "iou": 0.8171,
+      "sensitivity": 0.8739,
+      "specificity": 0.9925,
+      "inference_ms": 635.05
+    },
+    {
+      "filename": "kaggle_073.png",
+      "dice": 0.8887,
+      "iou": 0.7997,
+      "sensitivity": 0.8616,
+      "specificity": 0.9919,
+      "inference_ms": 722.28
+    },
+    {
+      "filename": "kaggle_074.png",
+      "dice": 0.8433,
+      "iou": 0.729,
+      "sensitivity": 0.7624,
+      "specificity": 0.9957,
+      "inference_ms": 631.74
+    },
+    {
+      "filename": "kaggle_075.png",
+      "dice": 0.8292,
+      "iou": 0.7082,
+      "sensitivity": 0.7582,
+      "specificity": 0.9939,
+      "inference_ms": 674.32
+    },
+    {
+      "filename": "kaggle_076.png",
+      "dice": 0.9379,
+      "iou": 0.8831,
+      "sensitivity": 0.909,
+      "specificity": 0.997,
+      "inference_ms": 628.8
+    },
+    {
+      "filename": "kaggle_077.png",
+      "dice": 0.9315,
+      "iou": 0.8718,
+      "sensitivity": 0.8984,
+      "specificity": 0.9972,
+      "inference_ms": 697.5
+    },
+    {
+      "filename": "kaggle_078.png",
+      "dice": 0.9271,
+      "iou": 0.8641,
+      "sensitivity": 0.9007,
+      "specificity": 0.9957,
+      "inference_ms": 674.56
+    },
+    {
+      "filename": "kaggle_079.png",
+      "dice": 0.9581,
+      "iou": 0.9196,
+      "sensitivity": 0.9581,
+      "specificity": 0.9955,
+      "inference_ms": 663.92
+    },
+    {
+      "filename": "kaggle_080.png",
+      "dice": 0.957,
+      "iou": 0.9175,
+      "sensitivity": 0.9479,
+      "specificity": 0.9965,
+      "inference_ms": 682.82
+    },
+    {
+      "filename": "kaggle_081.png",
+      "dice": 0.9115,
+      "iou": 0.8373,
+      "sensitivity": 0.8819,
+      "specificity": 0.9946,
+      "inference_ms": 675.75
+    },
+    {
+      "filename": "kaggle_082.png",
+      "dice": 0.9036,
+      "iou": 0.8241,
+      "sensitivity": 0.8559,
+      "specificity": 0.9959,
+      "inference_ms": 672.74
+    },
+    {
+      "filename": "kaggle_083.png",
+      "dice": 0.8886,
+      "iou": 0.7996,
+      "sensitivity": 0.8444,
+      "specificity": 0.994,
+      "inference_ms": 704.81
+    },
+    {
+      "filename": "kaggle_084.png",
+      "dice": 0.9009,
+      "iou": 0.8197,
+      "sensitivity": 0.8684,
+      "specificity": 0.9936,
+      "inference_ms": 670.07
+    },
+    {
+      "filename": "kaggle_085.png",
+      "dice": 0.8947,
+      "iou": 0.8094,
+      "sensitivity": 0.8933,
+      "specificity": 0.989,
+      "inference_ms": 643.59
+    },
+    {
+      "filename": "kaggle_086.png",
+      "dice": 0.8738,
+      "iou": 0.7759,
+      "sensitivity": 0.8353,
+      "specificity": 0.9919,
+      "inference_ms": 645.86
+    },
+    {
+      "filename": "kaggle_087.png",
+      "dice": 0.9521,
+      "iou": 0.9085,
+      "sensitivity": 0.9435,
+      "specificity": 0.9961,
+      "inference_ms": 661.54
+    },
+    {
+      "filename": "kaggle_088.png",
+      "dice": 0.9489,
+      "iou": 0.9028,
+      "sensitivity": 0.9254,
+      "specificity": 0.9975,
+      "inference_ms": 657.9
+    },
+    {
+      "filename": "kaggle_089.png",
+      "dice": 0.941,
+      "iou": 0.8886,
+      "sensitivity": 0.9208,
+      "specificity": 0.9967,
+      "inference_ms": 675.85
+    },
+    {
+      "filename": "kaggle_090.png",
+      "dice": 0.9466,
+      "iou": 0.8986,
+      "sensitivity": 0.9234,
+      "specificity": 0.9976,
+      "inference_ms": 726.0
+    },
+    {
+      "filename": "kaggle_091.png",
+      "dice": 0.9487,
+      "iou": 0.9025,
+      "sensitivity": 0.9409,
+      "specificity": 0.9956,
+      "inference_ms": 700.22
+    },
+    {
+      "filename": "kaggle_092.png",
+      "dice": 0.9354,
+      "iou": 0.8786,
+      "sensitivity": 0.915,
+      "specificity": 0.9963,
+      "inference_ms": 676.23
+    },
+    {
+      "filename": "kaggle_093.png",
+      "dice": 0.9477,
+      "iou": 0.9006,
+      "sensitivity": 0.9395,
+      "specificity": 0.9957,
+      "inference_ms": 686.68
+    },
+    {
+      "filename": "kaggle_094.png",
+      "dice": 0.9012,
+      "iou": 0.8202,
+      "sensitivity": 0.8671,
+      "specificity": 0.9943,
+      "inference_ms": 629.55
+    },
+    {
+      "filename": "kaggle_095.png",
+      "dice": 0.9148,
+      "iou": 0.843,
+      "sensitivity": 0.8982,
+      "specificity": 0.9935,
+      "inference_ms": 684.67
+    },
+    {
+      "filename": "kaggle_096.png",
+      "dice": 0.9216,
+      "iou": 0.8547,
+      "sensitivity": 0.9202,
+      "specificity": 0.9925,
+      "inference_ms": 701.89
+    },
+    {
+      "filename": "kaggle_097.png",
+      "dice": 0.9026,
+      "iou": 0.8224,
+      "sensitivity": 0.8659,
+      "specificity": 0.9943,
+      "inference_ms": 644.94
+    },
+    {
+      "filename": "kaggle_098.png",
+      "dice": 0.9189,
+      "iou": 0.85,
+      "sensitivity": 0.8954,
+      "specificity": 0.9945,
+      "inference_ms": 656.75
+    },
+    {
+      "filename": "kaggle_099.png",
+      "dice": 0.8388,
+      "iou": 0.7223,
+      "sensitivity": 0.8088,
+      "specificity": 0.9942,
+      "inference_ms": 653.47
+    },
+    {
+      "filename": "kaggle_100.png",
+      "dice": 0.923,
+      "iou": 0.8571,
+      "sensitivity": 0.8923,
+      "specificity": 0.9959,
+      "inference_ms": 687.53
+    },
+    {
+      "filename": "kaggle_101.png",
+      "dice": 0.8975,
+      "iou": 0.8141,
+      "sensitivity": 0.8589,
+      "specificity": 0.9947,
+      "inference_ms": 622.28
+    },
+    {
+      "filename": "kaggle_102.png",
+      "dice": 0.8902,
+      "iou": 0.8021,
+      "sensitivity": 0.8602,
+      "specificity": 0.993,
+      "inference_ms": 646.89
+    },
+    {
+      "filename": "kaggle_103.png",
+      "dice": 0.947,
+      "iou": 0.8993,
+      "sensitivity": 0.9339,
+      "specificity": 0.996,
+      "inference_ms": 614.61
+    },
+    {
+      "filename": "kaggle_104.png",
+      "dice": 0.9466,
+      "iou": 0.8987,
+      "sensitivity": 0.9392,
+      "specificity": 0.9953,
+      "inference_ms": 658.45
+    },
+    {
+      "filename": "kaggle_105.png",
+      "dice": 0.9359,
+      "iou": 0.8795,
+      "sensitivity": 0.9358,
+      "specificity": 0.9933,
+      "inference_ms": 666.79
+    },
+    {
+      "filename": "kaggle_106.png",
+      "dice": 0.9317,
+      "iou": 0.8721,
+      "sensitivity": 0.943,
+      "specificity": 0.9924,
+      "inference_ms": 659.22
+    },
+    {
+      "filename": "kaggle_107.png",
+      "dice": 0.9289,
+      "iou": 0.8673,
+      "sensitivity": 0.9312,
+      "specificity": 0.9928,
+      "inference_ms": 666.92
+    },
+    {
+      "filename": "kaggle_108.png",
+      "dice": 0.9492,
+      "iou": 0.9032,
+      "sensitivity": 0.9542,
+      "specificity": 0.9944,
+      "inference_ms": 666.61
+    },
+    {
+      "filename": "kaggle_109.png",
+      "dice": 0.9283,
+      "iou": 0.8662,
+      "sensitivity": 0.9408,
+      "specificity": 0.991,
+      "inference_ms": 671.21
+    },
+    {
+      "filename": "kaggle_110.png",
+      "dice": 0.915,
+      "iou": 0.8433,
+      "sensitivity": 0.9122,
+      "specificity": 0.9943,
+      "inference_ms": 624.58
+    },
+    {
+      "filename": "kaggle_111.png",
+      "dice": 0.9475,
+      "iou": 0.9002,
+      "sensitivity": 0.9329,
+      "specificity": 0.9959,
+      "inference_ms": 677.06
+    },
+    {
+      "filename": "kaggle_112.png",
+      "dice": 0.9165,
+      "iou": 0.8459,
+      "sensitivity": 0.8783,
+      "specificity": 0.9958,
+      "inference_ms": 647.84
+    },
+    {
+      "filename": "kaggle_113.png",
+      "dice": 0.9523,
+      "iou": 0.909,
+      "sensitivity": 0.9632,
+      "specificity": 0.9941,
+      "inference_ms": 630.27
+    },
+    {
+      "filename": "kaggle_114.png",
+      "dice": 0.9197,
+      "iou": 0.8514,
+      "sensitivity": 0.8924,
+      "specificity": 0.9962,
+      "inference_ms": 663.35
+    },
+    {
+      "filename": "kaggle_115.png",
+      "dice": 0.9576,
+      "iou": 0.9186,
+      "sensitivity": 0.9501,
+      "specificity": 0.9967,
+      "inference_ms": 629.33
+    },
+    {
+      "filename": "kaggle_116.png",
+      "dice": 0.7086,
+      "iou": 0.5487,
+      "sensitivity": 0.707,
+      "specificity": 0.9725,
+      "inference_ms": 680.51
+    },
+    {
+      "filename": "kaggle_117.png",
+      "dice": 0.9026,
+      "iou": 0.8225,
+      "sensitivity": 0.911,
+      "specificity": 0.9934,
+      "inference_ms": 674.26
+    },
+    {
+      "filename": "kaggle_118.png",
+      "dice": 0.9435,
+      "iou": 0.893,
+      "sensitivity": 0.9452,
+      "specificity": 0.9955,
+      "inference_ms": 659.53
+    },
+    {
+      "filename": "kaggle_119.png",
+      "dice": 0.9584,
+      "iou": 0.9202,
+      "sensitivity": 0.9459,
+      "specificity": 0.9973,
+      "inference_ms": 664.94
+    },
+    {
+      "filename": "kaggle_120.png",
+      "dice": 0.8622,
+      "iou": 0.7578,
+      "sensitivity": 0.821,
+      "specificity": 0.9963,
+      "inference_ms": 684.76
+    },
+    {
+      "filename": "kaggle_121.png",
+      "dice": 0.9337,
+      "iou": 0.8756,
+      "sensitivity": 0.9203,
+      "specificity": 0.9958,
+      "inference_ms": 631.09
+    },
+    {
+      "filename": "kaggle_122.png",
+      "dice": 0.9313,
+      "iou": 0.8714,
+      "sensitivity": 0.9253,
+      "specificity": 0.9949,
+      "inference_ms": 688.64
+    },
+    {
+      "filename": "kaggle_123.png",
+      "dice": 0.913,
+      "iou": 0.84,
+      "sensitivity": 0.8714,
+      "specificity": 0.9959,
+      "inference_ms": 671.52
+    },
+    {
+      "filename": "kaggle_124.png",
+      "dice": 0.9289,
+      "iou": 0.8672,
+      "sensitivity": 0.9202,
+      "specificity": 0.9952,
+      "inference_ms": 652.64
+    },
+    {
+      "filename": "kaggle_125.png",
+      "dice": 0.9603,
+      "iou": 0.9235,
+      "sensitivity": 0.9532,
+      "specificity": 0.9968,
+      "inference_ms": 646.64
+    },
+    {
+      "filename": "kaggle_126.png",
+      "dice": 0.9561,
+      "iou": 0.9158,
+      "sensitivity": 0.9527,
+      "specificity": 0.9961,
+      "inference_ms": 649.38
+    },
+    {
+      "filename": "kaggle_127.png",
+      "dice": 0.9513,
+      "iou": 0.9072,
+      "sensitivity": 0.9694,
+      "specificity": 0.9915,
+      "inference_ms": 641.12
+    },
+    {
+      "filename": "kaggle_128.png",
+      "dice": 0.9307,
+      "iou": 0.8703,
+      "sensitivity": 0.9524,
+      "specificity": 0.9923,
+      "inference_ms": 682.31
+    },
+    {
+      "filename": "kaggle_129.png",
+      "dice": 0.961,
+      "iou": 0.9248,
+      "sensitivity": 0.9665,
+      "specificity": 0.9954,
+      "inference_ms": 687.06
+    },
+    {
+      "filename": "kaggle_130.png",
+      "dice": 0.9571,
+      "iou": 0.9177,
+      "sensitivity": 0.9626,
+      "specificity": 0.9952,
+      "inference_ms": 660.59
+    },
+    {
+      "filename": "kaggle_131.png",
+      "dice": 0.8107,
+      "iou": 0.6817,
+      "sensitivity": 0.8412,
+      "specificity": 0.9909,
+      "inference_ms": 683.41
+    },
+    {
+      "filename": "kaggle_132.png",
+      "dice": 0.9249,
+      "iou": 0.8603,
+      "sensitivity": 0.9229,
+      "specificity": 0.9947,
+      "inference_ms": 665.27
+    },
+    {
+      "filename": "kaggle_133.png",
+      "dice": 0.9468,
+      "iou": 0.8989,
+      "sensitivity": 0.9439,
+      "specificity": 0.9961,
+      "inference_ms": 626.23
+    },
+    {
+      "filename": "kaggle_134.png",
+      "dice": 0.9576,
+      "iou": 0.9186,
+      "sensitivity": 0.9523,
+      "specificity": 0.9952,
+      "inference_ms": 633.85
+    },
+    {
+      "filename": "kaggle_135.png",
+      "dice": 0.9528,
+      "iou": 0.9098,
+      "sensitivity": 0.9479,
+      "specificity": 0.9968,
+      "inference_ms": 629.81
+    },
+    {
+      "filename": "kaggle_136.png",
+      "dice": 0.8712,
+      "iou": 0.7718,
+      "sensitivity": 0.8042,
+      "specificity": 0.9962,
+      "inference_ms": 684.35
+    },
+    {
+      "filename": "kaggle_137.png",
+      "dice": 0.8869,
+      "iou": 0.7968,
+      "sensitivity": 0.8454,
+      "specificity": 0.9949,
+      "inference_ms": 652.78
+    },
+    {
+      "filename": "kaggle_138.png",
+      "dice": 0.9232,
+      "iou": 0.8574,
+      "sensitivity": 0.9223,
+      "specificity": 0.9949,
+      "inference_ms": 677.99
+    },
+    {
+      "filename": "kaggle_139.png",
+      "dice": 0.9532,
+      "iou": 0.9105,
+      "sensitivity": 0.9413,
+      "specificity": 0.9966,
+      "inference_ms": 706.27
+    },
+    {
+      "filename": "kaggle_140.png",
+      "dice": 0.9485,
+      "iou": 0.9021,
+      "sensitivity": 0.9397,
+      "specificity": 0.9972,
+      "inference_ms": 651.34
+    },
+    {
+      "filename": "kaggle_141.png",
+      "dice": 0.9301,
+      "iou": 0.8693,
+      "sensitivity": 0.905,
+      "specificity": 0.9969,
+      "inference_ms": 693.81
+    },
+    {
+      "filename": "kaggle_142.png",
+      "dice": 0.9083,
+      "iou": 0.832,
+      "sensitivity": 0.9394,
+      "specificity": 0.9934,
+      "inference_ms": 643.4
+    },
+    {
+      "filename": "kaggle_143.png",
+      "dice": 0.9585,
+      "iou": 0.9204,
+      "sensitivity": 0.953,
+      "specificity": 0.9966,
+      "inference_ms": 651.79
+    },
+    {
+      "filename": "kaggle_144.png",
+      "dice": 0.9548,
+      "iou": 0.9134,
+      "sensitivity": 0.9541,
+      "specificity": 0.9957,
+      "inference_ms": 662.37
+    },
+    {
+      "filename": "kaggle_145.png",
+      "dice": 0.9237,
+      "iou": 0.8582,
+      "sensitivity": 0.9074,
+      "specificity": 0.9948,
+      "inference_ms": 674.19
+    },
+    {
+      "filename": "kaggle_146.png",
+      "dice": 0.9597,
+      "iou": 0.9226,
+      "sensitivity": 0.9692,
+      "specificity": 0.9958,
+      "inference_ms": 661.58
+    },
+    {
+      "filename": "kaggle_147.png",
+      "dice": 0.8241,
+      "iou": 0.7008,
+      "sensitivity": 0.8457,
+      "specificity": 0.9958,
+      "inference_ms": 676.77
+    },
+    {
+      "filename": "kaggle_148.png",
+      "dice": 0.918,
+      "iou": 0.8485,
+      "sensitivity": 0.9363,
+      "specificity": 0.9951,
+      "inference_ms": 635.4
+    },
+    {
+      "filename": "kaggle_149.png",
+      "dice": 0.893,
+      "iou": 0.8067,
+      "sensitivity": 0.8467,
+      "specificity": 0.9966,
+      "inference_ms": 635.71
+    },
+    {
+      "filename": "kaggle_150.png",
+      "dice": 0.9591,
+      "iou": 0.9215,
+      "sensitivity": 0.9572,
+      "specificity": 0.9962,
+      "inference_ms": 666.9
+    },
+    {
+      "filename": "kaggle_151.png",
+      "dice": 0.9114,
+      "iou": 0.8372,
+      "sensitivity": 0.918,
+      "specificity": 0.9965,
+      "inference_ms": 635.54
+    },
+    {
+      "filename": "kaggle_152.png",
+      "dice": 0.9448,
+      "iou": 0.8955,
+      "sensitivity": 0.946,
+      "specificity": 0.9946,
+      "inference_ms": 638.96
+    },
+    {
+      "filename": "kaggle_153.png",
+      "dice": 0.7361,
+      "iou": 0.5824,
+      "sensitivity": 0.8109,
+      "specificity": 0.9904,
+      "inference_ms": 667.19
+    },
+    {
+      "filename": "kaggle_154.png",
+      "dice": 0.9487,
+      "iou": 0.9024,
+      "sensitivity": 0.9584,
+      "specificity": 0.9946,
+      "inference_ms": 666.9
+    },
+    {
+      "filename": "kaggle_155.png",
+      "dice": 0.9268,
+      "iou": 0.8635,
+      "sensitivity": 0.9009,
+      "specificity": 0.9957,
+      "inference_ms": 664.13
+    },
+    {
+      "filename": "kaggle_156.png",
+      "dice": 0.9461,
+      "iou": 0.8977,
+      "sensitivity": 0.9301,
+      "specificity": 0.9956,
+      "inference_ms": 684.58
+    },
+    {
+      "filename": "kaggle_157.png",
+      "dice": 0.9414,
+      "iou": 0.8894,
+      "sensitivity": 0.925,
+      "specificity": 0.9965,
+      "inference_ms": 639.29
+    },
+    {
+      "filename": "kaggle_158.png",
+      "dice": 0.8047,
+      "iou": 0.6733,
+      "sensitivity": 0.7454,
+      "specificity": 0.9949,
+      "inference_ms": 678.15
+    },
+    {
+      "filename": "kaggle_159.png",
+      "dice": 0.7616,
+      "iou": 0.6149,
+      "sensitivity": 0.675,
+      "specificity": 0.9935,
+      "inference_ms": 655.34
+    },
+    {
+      "filename": "kaggle_160.png",
+      "dice": 0.8451,
+      "iou": 0.7317,
+      "sensitivity": 0.8102,
+      "specificity": 0.9909,
+      "inference_ms": 700.36
+    },
+    {
+      "filename": "kaggle_161.png",
+      "dice": 0.9294,
+      "iou": 0.8682,
+      "sensitivity": 0.9039,
+      "specificity": 0.9966,
+      "inference_ms": 657.2
+    },
+    {
+      "filename": "kaggle_162.png",
+      "dice": 0.9262,
+      "iou": 0.8625,
+      "sensitivity": 0.9062,
+      "specificity": 0.9956,
+      "inference_ms": 615.77
+    },
+    {
+      "filename": "kaggle_163.png",
+      "dice": 0.9118,
+      "iou": 0.838,
+      "sensitivity": 0.8845,
+      "specificity": 0.9961,
+      "inference_ms": 649.08
+    },
+    {
+      "filename": "kaggle_164.png",
+      "dice": 0.8618,
+      "iou": 0.7571,
+      "sensitivity": 0.8168,
+      "specificity": 0.9946,
+      "inference_ms": 652.93
+    },
+    {
+      "filename": "kaggle_165.png",
+      "dice": 0.8906,
+      "iou": 0.8028,
+      "sensitivity": 0.8664,
+      "specificity": 0.9928,
+      "inference_ms": 674.55
+    },
+    {
+      "filename": "kaggle_166.png",
+      "dice": 0.9564,
+      "iou": 0.9164,
+      "sensitivity": 0.9401,
+      "specificity": 0.9974,
+      "inference_ms": 643.52
+    },
+    {
+      "filename": "kaggle_167.png",
+      "dice": 0.9406,
+      "iou": 0.8879,
+      "sensitivity": 0.9156,
+      "specificity": 0.9972,
+      "inference_ms": 679.43
+    },
+    {
+      "filename": "kaggle_168.png",
+      "dice": 0.9575,
+      "iou": 0.9185,
+      "sensitivity": 0.946,
+      "specificity": 0.9974,
+      "inference_ms": 668.25
+    },
+    {
+      "filename": "kaggle_169.png",
+      "dice": 0.8559,
+      "iou": 0.7481,
+      "sensitivity": 0.8337,
+      "specificity": 0.9949,
+      "inference_ms": 638.95
+    },
+    {
+      "filename": "kaggle_170.png",
+      "dice": 0.9438,
+      "iou": 0.8937,
+      "sensitivity": 0.9308,
+      "specificity": 0.9965,
+      "inference_ms": 681.81
+    },
+    {
+      "filename": "kaggle_171.png",
+      "dice": 0.8482,
+      "iou": 0.7364,
+      "sensitivity": 0.8293,
+      "specificity": 0.9894,
+      "inference_ms": 650.06
+    },
+    {
+      "filename": "kaggle_172.png",
+      "dice": 0.845,
+      "iou": 0.7316,
+      "sensitivity": 0.8362,
+      "specificity": 0.9873,
+      "inference_ms": 662.32
+    },
+    {
+      "filename": "kaggle_173.png",
+      "dice": 0.838,
+      "iou": 0.7212,
+      "sensitivity": 0.8364,
+      "specificity": 0.9855,
+      "inference_ms": 654.28
+    },
+    {
+      "filename": "kaggle_174.png",
+      "dice": 0.8098,
+      "iou": 0.6804,
+      "sensitivity": 0.7839,
+      "specificity": 0.9937,
+      "inference_ms": 638.25
+    },
+    {
+      "filename": "kaggle_175.png",
+      "dice": 0.9509,
+      "iou": 0.9065,
+      "sensitivity": 0.9571,
+      "specificity": 0.9952,
+      "inference_ms": 696.88
+    },
+    {
+      "filename": "kaggle_176.png",
+      "dice": 0.8917,
+      "iou": 0.8045,
+      "sensitivity": 0.9547,
+      "specificity": 0.9926,
+      "inference_ms": 700.46
+    },
+    {
+      "filename": "kaggle_177.png",
+      "dice": 0.939,
+      "iou": 0.8849,
+      "sensitivity": 0.9501,
+      "specificity": 0.9938,
+      "inference_ms": 632.1
+    },
+    {
+      "filename": "kaggle_178.png",
+      "dice": 0.927,
+      "iou": 0.864,
+      "sensitivity": 0.9037,
+      "specificity": 0.9958,
+      "inference_ms": 670.67
+    },
+    {
+      "filename": "kaggle_179.png",
+      "dice": 0.9408,
+      "iou": 0.8882,
+      "sensitivity": 0.9512,
+      "specificity": 0.9946,
+      "inference_ms": 624.01
+    },
+    {
+      "filename": "kaggle_180.png",
+      "dice": 0.9454,
+      "iou": 0.8965,
+      "sensitivity": 0.9523,
+      "specificity": 0.9951,
+      "inference_ms": 670.24
+    },
+    {
+      "filename": "kaggle_181.png",
+      "dice": 0.8082,
+      "iou": 0.6782,
+      "sensitivity": 0.7403,
+      "specificity": 0.9965,
+      "inference_ms": 620.75
+    },
+    {
+      "filename": "kaggle_182.png",
+      "dice": 0.8687,
+      "iou": 0.7679,
+      "sensitivity": 0.8181,
+      "specificity": 0.995,
+      "inference_ms": 656.52
+    },
+    {
+      "filename": "kaggle_183.png",
+      "dice": 0.9154,
+      "iou": 0.8439,
+      "sensitivity": 0.9096,
+      "specificity": 0.993,
+      "inference_ms": 689.01
+    },
+    {
+      "filename": "kaggle_184.png",
+      "dice": 0.8841,
+      "iou": 0.7923,
+      "sensitivity": 0.8515,
+      "specificity": 0.9939,
+      "inference_ms": 674.76
+    },
+    {
+      "filename": "kaggle_185.png",
+      "dice": 0.9084,
+      "iou": 0.8321,
+      "sensitivity": 0.8836,
+      "specificity": 0.995,
+      "inference_ms": 638.57
+    },
+    {
+      "filename": "kaggle_186.png",
+      "dice": 0.9448,
+      "iou": 0.8954,
+      "sensitivity": 0.9402,
+      "specificity": 0.9955,
+      "inference_ms": 741.36
+    },
+    {
+      "filename": "kaggle_187.png",
+      "dice": 0.8884,
+      "iou": 0.7993,
+      "sensitivity": 0.8427,
+      "specificity": 0.9956,
+      "inference_ms": 681.91
+    },
+    {
+      "filename": "kaggle_188.png",
+      "dice": 0.9553,
+      "iou": 0.9144,
+      "sensitivity": 0.9703,
+      "specificity": 0.9947,
+      "inference_ms": 726.58
+    },
+    {
+      "filename": "kaggle_189.png",
+      "dice": 0.8814,
+      "iou": 0.788,
+      "sensitivity": 0.8329,
+      "specificity": 0.9957,
+      "inference_ms": 650.83
+    },
+    {
+      "filename": "kaggle_190.png",
+      "dice": 0.935,
+      "iou": 0.8779,
+      "sensitivity": 0.925,
+      "specificity": 0.9959,
+      "inference_ms": 631.87
+    },
+    {
+      "filename": "kaggle_191.png",
+      "dice": 0.9111,
+      "iou": 0.8368,
+      "sensitivity": 0.8839,
+      "specificity": 0.995,
+      "inference_ms": 716.07
+    },
+    {
+      "filename": "kaggle_192.png",
+      "dice": 0.8877,
+      "iou": 0.7981,
+      "sensitivity": 0.8787,
+      "specificity": 0.9918,
+      "inference_ms": 672.29
+    },
+    {
+      "filename": "kaggle_193.png",
+      "dice": 0.9054,
+      "iou": 0.8272,
+      "sensitivity": 0.8877,
+      "specificity": 0.994,
+      "inference_ms": 658.69
+    },
+    {
+      "filename": "kaggle_194.png",
+      "dice": 0.9207,
+      "iou": 0.8531,
+      "sensitivity": 0.9389,
+      "specificity": 0.9942,
+      "inference_ms": 641.5
+    },
+    {
+      "filename": "kaggle_195.png",
+      "dice": 0.8635,
+      "iou": 0.7598,
+      "sensitivity": 0.9547,
+      "specificity": 0.9912,
+      "inference_ms": 662.42
+    },
+    {
+      "filename": "kaggle_196.png",
+      "dice": 0.9352,
+      "iou": 0.8782,
+      "sensitivity": 0.9392,
+      "specificity": 0.994,
+      "inference_ms": 668.16
+    },
+    {
+      "filename": "kaggle_197.png",
+      "dice": 0.9304,
+      "iou": 0.8699,
+      "sensitivity": 0.9233,
+      "specificity": 0.995,
+      "inference_ms": 652.25
+    },
+    {
+      "filename": "kaggle_198.png",
+      "dice": 0.9579,
+      "iou": 0.9192,
+      "sensitivity": 0.9592,
+      "specificity": 0.9962,
+      "inference_ms": 668.38
+    },
+    {
+      "filename": "kaggle_199.png",
+      "dice": 0.9412,
+      "iou": 0.889,
+      "sensitivity": 0.9442,
+      "specificity": 0.9945,
+      "inference_ms": 638.35
+    },
+    {
+      "filename": "kaggle_200.png",
+      "dice": 0.9568,
+      "iou": 0.9171,
+      "sensitivity": 0.9607,
+      "specificity": 0.9951,
+      "inference_ms": 635.06
+    }
+  ]
+}

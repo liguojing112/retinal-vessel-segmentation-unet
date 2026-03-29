@@ -1,3 +1,18 @@
+"""项目名称：基于U-Net的视网膜血管图像分割
+
+作者信息：李国敬
+
+GitHub：liguojing112
+
+创建日期：2026/3/26
+
+许可证：MIT
+
+模型加载模块。
+
+负责按候选 checkpoint 顺序加载模型，并提取对应评估指标元信息。"""
+
+
 import logging
 from dataclasses import dataclass
 from datetime import datetime, timezone

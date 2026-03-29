@@ -1,3 +1,18 @@
+"""项目名称：基于U-Net的视网膜血管图像分割
+
+作者信息：李国敬
+
+GitHub：liguojing112
+
+创建日期：2026/3/26
+
+许可证：MIT
+
+推理模型结构定义。
+
+定义演示系统使用的 ImprovedUNet 网络结构（含残差与通道注意力）。"""
+
+
 import torch
 import torch.nn as nn
 

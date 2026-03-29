@@ -1,0 +1,51 @@
+{
+  "source_csv": "C:\\Workspace\\retinal-vessel-segmentation-unet\\experiments\\results\\loss_bce_dice\\per_sample_metrics.csv",
+  "num_samples": 200,
+  "metrics": {
+    "dice": {
+      "mean": 0.897171,
+      "std": 0.09532669169623345,
+      "min": 0.1356,
+      "max": 0.9669,
+      "median": 0.92415,
+      "q1": 0.8875,
+      "q3": 0.9466
+    },
+    "iou": {
+      "mean": 0.8234955,
+      "std": 0.1185865887226476,
+      "min": 0.0727,
+      "max": 0.9359,
+      "median": 0.859,
+      "q1": 0.7977750000000001,
+      "q3": 0.898625
+    },
+    "sensitivity": {
+      "mean": 0.8813905,
+      "std": 0.11288214808610202,
+      "min": 0.0755,
+      "max": 0.9703,
+      "median": 0.9122,
+      "q1": 0.858725,
+      "q3": 0.9436
+    },
+    "specificity": {
+      "mean": 0.9947695,
+      "std": 0.0026067403449769712,
+      "min": 0.9725,
+      "max": 0.9993,
+      "median": 0.9952,
+      "q1": 0.994,
+      "q3": 0.9962
+    },
+    "inference_ms": {
+      "mean": 650.05835,
+      "std": 37.02495165429001,
+      "min": 555.27,
+      "max": 779.84,
+      "median": 654.12,
+      "q1": 629.7449999999999,
+      "q3": 674.275
+    }
+  }
+}

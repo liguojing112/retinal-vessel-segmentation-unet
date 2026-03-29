@@ -1,0 +1,12 @@
+{
+  "name": "no_attention",
+  "dice": 0.8835,
+  "iou": 0.8005,
+  "sensitivity": 0.9044,
+  "specificity": 0.9897,
+  "params": 2020737,
+  "avg_inference_ms": 548.74,
+  "seed": 42,
+  "threshold": 0.5,
+  "notes": "Ablation: Channel Attention removed"
+}

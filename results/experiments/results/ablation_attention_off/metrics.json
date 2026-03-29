@@ -1,0 +1,12 @@
+{
+  "name": "ablation_attention_off",
+  "dice": 0.8877,
+  "iou": 0.8074,
+  "sensitivity": 0.9022,
+  "specificity": 0.9911,
+  "params": 2028929,
+  "avg_inference_ms": 504.12,
+  "seed": 42,
+  "threshold": 0.5,
+  "notes": "ablation without channel attention"
+}

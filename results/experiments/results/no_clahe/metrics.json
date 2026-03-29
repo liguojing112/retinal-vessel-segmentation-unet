@@ -1,0 +1,12 @@
+{
+  "name": "no_clahe",
+  "dice": 0.8867,
+  "iou": 0.806,
+  "sensitivity": 0.907,
+  "specificity": 0.9905,
+  "params": 2028929,
+  "avg_inference_ms": 545.73,
+  "seed": 42,
+  "threshold": 0.5,
+  "notes": "Ablation: CLAHE preprocessing removed"
+}

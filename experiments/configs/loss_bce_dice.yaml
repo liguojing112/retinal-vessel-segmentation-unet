@@ -27,5 +27,7 @@ preprocessing:
 
 evaluation:
   threshold: 0.5
+  # 若权重在云同步目录，可显式指定（不设则自动尝试 experiments/results 与 results/experiments/results）
+  # checkpoint: results/experiments/results/loss_bce_dice/best_model.pth
 
 notes: "Ablation: Loss changed to BCE+Dice (no pos_weight/fn_penalty vs Combo)"

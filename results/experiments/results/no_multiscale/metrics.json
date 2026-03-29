@@ -1,0 +1,12 @@
+{
+  "name": "no_multiscale",
+  "dice": 0.8884,
+  "iou": 0.8088,
+  "sensitivity": 0.8994,
+  "specificity": 0.9915,
+  "params": 1992001,
+  "avg_inference_ms": 493.22,
+  "seed": 42,
+  "threshold": 0.5,
+  "notes": "Ablation: Multi-scale head removed (single 3x3 conv)"
+}

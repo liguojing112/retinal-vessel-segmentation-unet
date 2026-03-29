@@ -7,11 +7,13 @@ Usage:
 """
 
 import argparse
+import csv
 import json
 import os
 import random
 import time
 from pathlib import Path
+from typing import Any
 
 import cv2
 import numpy as np
@@ -214,6 +216,8 @@ class FundusDataset(Dataset):
             mask_path = os.path.join(mask_dir, fname)
             if os.path.exists(mask_path):
                 self.samples.append((os.path.join(img_dir, fname), mask_path))
+
+        self.filenames: list[str] = [os.path.basename(pair[0]) for pair in self.samples]
 
         tag = "训练" if train else "测试"
         print(f"  [{tag}集] 加载 {len(self.samples)} 张 from {img_dir}")
@@ -496,11 +500,61 @@ def train(cfg: dict) -> Path:
 
 
 # ---------------------------------------------------------------------------
+# Checkpoint 解析（支持本机与云同步目录）
+# ---------------------------------------------------------------------------
+
+def resolve_checkpoint_path(
+    exp_name: str,
+    cfg: dict[str, Any],
+    override: str | Path | None = None,
+) -> tuple[Path | None, list[str]]:
+    """按优先级查找 ``best_model.pth``。
+
+    顺序：命令行 ``--checkpoint`` → YAML ``evaluation.checkpoint`` →
+    ``experiments/results/<name>/best_model.pth`` →
+    ``results/experiments/results/<name>/best_model.pth``（从服务器同步结果时的常见路径）。
+
+    返回 ``(找到的路径, 已尝试过的绝对路径列表)``。
+    """
+    candidates: list[Path] = []
+    if override:
+        candidates.append(Path(str(override)))
+    eval_block = cfg.get("evaluation") or {}
+    ck_yaml = eval_block.get("checkpoint")
+    if ck_yaml:
+        candidates.append(Path(str(ck_yaml)))
+    candidates.extend(
+        [
+            Path("experiments") / "results" / exp_name / "best_model.pth",
+            Path("results") / "experiments" / "results" / exp_name / "best_model.pth",
+        ]
+    )
+
+    tried: list[str] = []
+    cwd = Path.cwd()
+    for raw in candidates:
+        path = raw.expanduser()
+        if not path.is_absolute():
+            path = cwd / path
+        resolved = path.resolve()
+        tried.append(str(resolved))
+        try:
+            if resolved.is_file() and resolved.stat().st_size > 0:
+                return resolved, tried
+        except OSError:
+            continue
+    return None, tried
+
+
+# ---------------------------------------------------------------------------
 # 评估流程
 # ---------------------------------------------------------------------------
 
-def evaluate(cfg: dict, ckpt_path: Path) -> dict[str, float]:
-    """加载 checkpoint 在测试集上评估，返回指标字典。"""
+def evaluate(cfg: dict, ckpt_path: Path) -> dict[str, Any]:
+    """加载 checkpoint 在测试集上评估。
+
+    返回字典含全测试集平均指标，以及 ``per_sample`` 逐张图像指标列表。
+    """
     model_cfg = cfg.get("model", {})
     prep_cfg = cfg.get("preprocessing", {})
     threshold = cfg.get("evaluation", {}).get("threshold", 0.5)
@@ -529,24 +583,39 @@ def evaluate(cfg: dict, ckpt_path: Path) -> dict[str, float]:
         clahe_clip=prep_cfg.get("clahe_clip", 2.0),
         input_size=prep_cfg.get("input_size", 512),
     )
-    val_loader = DataLoader(val_ds, batch_size=1, shuffle=False)
 
     all_metrics: dict[str, list[float]] = {"dice": [], "iou": [], "sensitivity": [], "specificity": []}
     inference_times: list[float] = []
+    per_sample: list[dict[str, Any]] = []
 
     with torch.no_grad():
-        for images, masks in tqdm(val_loader, desc="评估中"):
-            images = images.to(device)
+        for idx in tqdm(range(len(val_ds)), desc="评估中"):
+            images_t, masks_t = val_ds[idx]
+            images = images_t.unsqueeze(0).to(device)
+            masks_np = masks_t.numpy()
+
             start = time.perf_counter()
             outputs = model(images)
-            elapsed = (time.perf_counter() - start) * 1000
-            inference_times.append(elapsed)
+            elapsed_ms = round((time.perf_counter() - start) * 1000, 2)
+            inference_times.append(elapsed_ms)
 
-            m = calculate_metrics(outputs.cpu().numpy()[0, 0], masks.numpy()[0, 0], threshold)
+            m = calculate_metrics(outputs.cpu().numpy()[0, 0], masks_np[0], threshold)
             for k in all_metrics:
                 all_metrics[k].append(m[k])
 
-    result = {
+            fname = val_ds.filenames[idx]
+            per_sample.append(
+                {
+                    "filename": fname,
+                    "dice": round(m["dice"], 4),
+                    "iou": round(m["iou"], 4),
+                    "sensitivity": round(m["sensitivity"], 4),
+                    "specificity": round(m["specificity"], 4),
+                    "inference_ms": elapsed_ms,
+                }
+            )
+
+    result: dict[str, Any] = {
         "name": cfg["name"],
         "dice": round(float(np.mean(all_metrics["dice"])), 4),
         "iou": round(float(np.mean(all_metrics["iou"])), 4),
@@ -557,6 +626,9 @@ def evaluate(cfg: dict, ckpt_path: Path) -> dict[str, float]:
         "seed": cfg.get("seed", 42),
         "threshold": threshold,
         "notes": cfg.get("notes", ""),
+        "checkpoint": str(ckpt_path),
+        "num_samples": len(per_sample),
+        "per_sample": per_sample,
     }
     return result
 
@@ -565,12 +637,71 @@ def evaluate(cfg: dict, ckpt_path: Path) -> dict[str, float]:
 # 写 metrics.json
 # ---------------------------------------------------------------------------
 
-def save_metrics(cfg: dict, metrics: dict) -> Path:
-    out_dir = Path("experiments/results") / cfg["name"]
+def metrics_sync_directory(cfg: dict[str, Any], ckpt_path: Path | None) -> Path | None:
+    """若权重位于 ``results/experiments/results/<实验名>/``，返回该目录以同步写入指标。"""
+    if ckpt_path is None:
+        return None
+    name = cfg["name"]
+    try:
+        sync_base = (Path.cwd() / "results" / "experiments" / "results").resolve()
+        parent = ckpt_path.resolve().parent
+        if parent.parent == sync_base and parent.name == name:
+            return parent
+    except OSError:
+        return None
+    return None
+
+
+def _write_metrics_artifacts(out_dir: Path, metrics: dict[str, Any], write_per_sample_csv: bool) -> Path:
+    """将 ``metrics.json`` 与可选 ``per_sample_metrics.csv`` 写入 ``out_dir``。"""
     out_dir.mkdir(parents=True, exist_ok=True)
     out_path = out_dir / "metrics.json"
     out_path.write_text(json.dumps(metrics, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    samples = metrics.get("per_sample")
+    if write_per_sample_csv and isinstance(samples, list) and samples:
+        csv_path = out_dir / "per_sample_metrics.csv"
+        fieldnames = ["filename", "dice", "iou", "sensitivity", "specificity", "inference_ms"]
+        with csv_path.open("w", newline="", encoding="utf-8") as csv_file:
+            writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+            writer.writeheader()
+            for row in samples:
+                writer.writerow(
+                    {
+                        "filename": row["filename"],
+                        "dice": row["dice"],
+                        "iou": row["iou"],
+                        "sensitivity": row["sensitivity"],
+                        "specificity": row["specificity"],
+                        "inference_ms": row["inference_ms"],
+                    }
+                )
+    return out_path
+
+
+def save_metrics(
+    cfg: dict[str, Any],
+    metrics: dict[str, Any],
+    write_per_sample_csv: bool = True,
+    ckpt_path: Path | None = None,
+) -> Path:
+    """写入标准目录 ``experiments/results/<name>/``；若权重来自云同步路径则再写一份到同目录。
+
+    云同步路径判定：``results/experiments/results/<实验名>/best_model.pth``。
+    """
+    primary = Path("experiments/results") / cfg["name"]
+    out_path = _write_metrics_artifacts(primary, metrics, write_per_sample_csv)
     print(f"指标已保存: {out_path}")
+    if write_per_sample_csv and metrics.get("per_sample"):
+        print(f"逐样本 CSV 已保存: {primary / 'per_sample_metrics.csv'}")
+
+    sync_dir = metrics_sync_directory(cfg, ckpt_path)
+    if sync_dir is not None and sync_dir.resolve() != primary.resolve():
+        _write_metrics_artifacts(sync_dir, metrics, write_per_sample_csv)
+        print(f"已同步指标到云目录: {sync_dir / 'metrics.json'}")
+        if write_per_sample_csv and metrics.get("per_sample"):
+            print(f"已同步逐样本 CSV: {sync_dir / 'per_sample_metrics.csv'}")
+
     return out_path
 
 
@@ -584,6 +715,11 @@ def main() -> None:
     parser.add_argument("--seed", type=int, default=None, help="覆盖配置中的随机种子")
     parser.add_argument("--eval-only", action="store_true", help="仅评估，不训练")
     parser.add_argument("--checkpoint", type=str, default=None, help="指定 checkpoint 路径（eval-only 时有效）")
+    parser.add_argument(
+        "--no-per-sample-csv",
+        action="store_true",
+        help="不写入 per_sample_metrics.csv（仍会在 metrics.json 中保留 per_sample）",
+    )
     args = parser.parse_args()
 
     with open(args.config, "r", encoding="utf-8") as f:
@@ -595,16 +731,25 @@ def main() -> None:
     exp_name = cfg["name"]
 
     if args.eval_only:
-        ckpt = Path(args.checkpoint) if args.checkpoint else Path("experiments/results") / exp_name / "best_model.pth"
-        if not ckpt.exists():
-            print(f"[错误] checkpoint 不存在: {ckpt}")
+        ckpt, tried = resolve_checkpoint_path(exp_name, cfg, args.checkpoint)
+        if ckpt is None:
+            print("[错误] 未找到可用 checkpoint，已按顺序尝试:")
+            for p in tried:
+                print(f"  - {p}")
+            print("请使用 --checkpoint 指定 .pth 路径，或在 YAML 的 evaluation.checkpoint 中填写。")
             return
+        print(f"使用权重: {ckpt}")
         metrics = evaluate(cfg, ckpt)
     else:
         ckpt = train(cfg)
         metrics = evaluate(cfg, ckpt)
 
-    save_metrics(cfg, metrics)
+    save_metrics(
+        cfg,
+        metrics,
+        write_per_sample_csv=not args.no_per_sample_csv,
+        ckpt_path=ckpt,
+    )
     print(f"\n实验 [{exp_name}] 全部完成。")
     print(f"  Dice={metrics['dice']:.4f}  Sens={metrics['sensitivity']:.4f}  "
           f"Spec={metrics['specificity']:.4f}  Params={metrics['params']:,}")

@@ -1,3 +1,20 @@
+"""项目名称：基于U-Net的视网膜血管图像分割
+
+作者信息：李国敬
+
+GitHub：liguojing112
+
+创建日期：2026/3/26
+
+许可证：MIT
+
+后处理模块单元测试。
+
+本文件测试目标：
+1) 阈值化输出是否严格为二值掩膜（0/255）；
+2) 二分类评估指标在完美匹配场景下是否为 100%。"""
+
+
 import numpy as np
 
 from app.inference.postprocess import evaluate_binary_metrics, threshold_prediction

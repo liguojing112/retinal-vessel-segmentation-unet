@@ -1,0 +1,12 @@
+{
+  "name": "input_256",
+  "dice": 0.8501,
+  "iou": 0.7467,
+  "sensitivity": 0.8702,
+  "specificity": 0.9891,
+  "params": 2028929,
+  "avg_inference_ms": 86.63,
+  "seed": 42,
+  "threshold": 0.5,
+  "notes": "Ablation: Input size 256x256 (vs baseline 512x512)"
+}

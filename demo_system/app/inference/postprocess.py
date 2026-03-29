@@ -1,3 +1,18 @@
+"""项目名称：基于U-Net的视网膜血管图像分割
+
+作者信息：李国敬
+
+GitHub：liguojing112
+
+创建日期：2026/3/26
+
+许可证：MIT
+
+后处理模块。
+
+包含阈值化、掩膜缩放、叠加可视化与二值分割指标计算。"""
+
+
 import numpy as np
 
 from app.core.config import PREDICTION_THRESHOLD

@@ -31,3 +31,9 @@ venv/
 *.log
 .DS_Store
 Thumbs.db
+
+# Local IDE / scratch (do not publish)
+demo_system/.cursor/
+demo_system/temp_ecc/
+docstring_update_errors.txt
+modified_python_files.txt

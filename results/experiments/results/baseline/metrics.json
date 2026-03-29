@@ -1,0 +1,12 @@
+{
+  "name": "baseline",
+  "dice": 0.8903,
+  "iou": 0.8117,
+  "sensitivity": 0.8957,
+  "specificity": 0.9923,
+  "params": 2028929,
+  "avg_inference_ms": 569.75,
+  "seed": 42,
+  "threshold": 0.5,
+  "notes": "Baseline: all modules enabled (Residual + CA + Multi-scale)"
+}
